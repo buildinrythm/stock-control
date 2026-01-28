@@ -1,4 +1,4 @@
-class product:
+class Product:
     pass
 
 class Goods:
@@ -6,6 +6,7 @@ class Goods:
         self.prodCode = prodCode
         self.quantity = quantity
 
+    @staticmethod
     def welcomeMessage(): 
         print("=" * 50)
         print("Welcome to the stock control system!")
@@ -39,14 +40,14 @@ class GoodsOut(Goods):
         super().__init__(prodCode, quantity)
 
     def getReg(self):
-        self.getReg = input("What is your car's registration number?" "\n")
+        self.vehicleReg = input("What is your car's registration number?" "\n")
 
     def displayDetails(self):
         """Print Goods Out details to screen"""
         print("\n=== GOODS OUT TRANSACTION ===")
         print(f"Product Code: {self.prodCode}")
         print(f"Quantity: {self.quantity}")
-        print(f"Vehicle Registration: {self.getReg}")
+        print(f"Vehicle Registration: {self.vehicleReg}")
         print("=============================\n")
 
 
@@ -64,10 +65,8 @@ def main():
     #Get delivery info
     prodCode = input("Enter product code" "\n")
     quantity = int(input("Enter quantity" "\n"))
-
-    #Print shared summary
     
-
+    # Choose to create goodsin object or not
     if choice == "1":
         product = GoodsIn(prodCode, quantity)
         product.calcStorageCharge()
@@ -76,7 +75,7 @@ def main():
         product = GoodsOut(prodCode, quantity)
         product.getReg()
     
-    
+    #Polymorph the display
     product.displayDetails()
     
 
