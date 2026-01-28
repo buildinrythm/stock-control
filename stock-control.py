@@ -11,6 +11,10 @@ class Goods:
         print("Welcome to the stock control system!")
         print("=" * 50)
 
+    def getSummary(self):
+        print(f"Product code:                 {self.prodCode}")
+        print(f"quantity:                     {self.quantity}")
+
 
 class GoodsIn(Goods): 
 
@@ -22,6 +26,14 @@ class GoodsIn(Goods):
         self.storageCharge = self.quantity * self.chargePerProduct
         return self.storageCharge
 
+    def displayDetails(self):
+        """Print Goods In details to screen"""
+        print("\n=== GOODS IN TRANSACTION ===")
+        print(f"Product Code: {self.prodCode}")
+        print(f"Quantity: {self.quantity}")
+        print(f"Total Storage Charge: €{self.storageCharge:.2f}")
+        print("============================\n")
+
 class GoodsOut(Goods):
     def __init__(self, prodCode, quantity):
         super().__init__(prodCode, quantity)
@@ -29,16 +41,43 @@ class GoodsOut(Goods):
     def getReg(self):
         self.getReg = input("What is your car's registration number?" "\n")
 
+    def displayDetails(self):
+        """Print Goods Out details to screen"""
+        print("\n=== GOODS OUT TRANSACTION ===")
+        print(f"Product Code: {self.prodCode}")
+        print(f"Quantity: {self.quantity}")
+        print(f"Vehicle Registration: {self.getReg}")
+        print("=============================\n")
+
+
 def main():
     # Welcome User
     Goods.welcomeMessage()
     choice = input("Enter 1 for (Goods in) Enter 2 for (Goods out)" '\n')
 
     # Get user choice
-    if choice == 1:
+    if choice == "1":
         print("Goods in confirmed")
     else: 
         print("Goods out confirmed")
+
+    #Get delivery info
+    prodCode = input("Enter product code" "\n")
+    quantity = int(input("Enter quantity" "\n"))
+
+    #Print shared summary
+    
+
+    if choice == "1":
+        product = GoodsIn(prodCode, quantity)
+        product.calcStorageCharge()
+    
+    else:
+        product = GoodsOut(prodCode, quantity)
+        product.getReg()
+    
+    
+    product.displayDetails()
     
 
 
